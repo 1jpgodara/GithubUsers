@@ -14,7 +14,7 @@ class UserSource(private val githubUserApi: UsersApi) : PagingSource<Int, Github
             LoadResult.Page(
                 data = results,
                 prevKey = params.key,
-                nextKey = results.size
+                nextKey = params.key ?: 0 + results.size
             )
         } catch (exception: IOException) {
             return LoadResult.Error(exception)

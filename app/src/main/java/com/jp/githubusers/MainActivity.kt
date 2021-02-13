@@ -2,6 +2,9 @@ package com.jp.githubusers
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.jp.githubusers.data.GithubUser
+import com.jp.githubusers.util.commitTransaction
+import com.jp.githubusers.view.UserDetailFragment
 import com.jp.githubusers.view.UserListFragment
 
 class MainActivity : AppCompatActivity() {
@@ -20,10 +23,9 @@ class MainActivity : AppCompatActivity() {
             .commitNow()
     }
 
-//    fun openUserDetail(inputData: InputData) {
-//        supportFragmentManager
-//            .beginTransaction()
-//            .replace(R.id.container, UserDetailFragment.newInstance(inputData))
-//            .commitNow()
-//    }
+    fun openUserDetail(users: List<GithubUser?>) {
+        supportFragmentManager.commitTransaction {
+            replace(R.id.container, UserDetailFragment.newInstance(users))
+        }
+    }
 }

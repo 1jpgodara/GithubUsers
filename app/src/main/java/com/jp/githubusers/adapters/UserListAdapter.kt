@@ -6,7 +6,7 @@ import com.jp.githubusers.R
 import com.jp.githubusers.data.GithubUser
 
 open class UserListAdapter(
-    private val onItemClick: (position: Int) -> Unit
+    private val onItemClick: (users: List<GithubUser?>) -> Unit
 ) : PagingDataAdapter<GithubUser, GithubUserListItemViewHolder>(GithubUser.DIFF_CALLBACK) {
 
     override fun getItemViewType(position: Int) = R.layout.item_github_user_list
@@ -17,6 +17,12 @@ open class UserListAdapter(
     ): GithubUserListItemViewHolder {
         return when (viewType) {
             R.layout.item_github_user_list -> GithubUserListItemViewHolder.create(parent, viewType)
+                .apply {
+                    this.itemView.setOnClickListener {
+                        onItemClick(getClickData(adapterPosition))
+
+                    }
+                }
             else -> throw IllegalArgumentException("unknown view type $viewType")
         }
     }
@@ -25,6 +31,17 @@ open class UserListAdapter(
         val githubUser = getItem(position)
         githubUser?.let {
             holder.bindTo(githubUser)
+        }
+    }
+
+
+    private fun getClickData(position: Int): List<GithubUser?> {
+        return if (position == 0) {
+            listOf(null, getItem(position), getItem(position + 1))
+        } else if (position == itemCount) {
+            listOf(getItem(position - 1), getItem(position), null)
+        } else {
+            listOf(getItem(position - 1), getItem(position), getItem(position + 1))
         }
     }
 }

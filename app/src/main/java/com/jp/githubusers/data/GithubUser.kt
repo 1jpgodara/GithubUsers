@@ -1,8 +1,11 @@
 package com.jp.githubusers.data
 
+import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class GithubUser(
     @SerializedName("login") val login: String,
     @SerializedName("id") val id: Int,
@@ -22,7 +25,7 @@ data class GithubUser(
     @SerializedName("received_events_url") val receivedEventsUrl: String,
     @SerializedName("type") val type: String,
     @SerializedName("site_admin") val siteAdmin: Boolean
-) {
+) : Parcelable {
     companion object {
         val DIFF_CALLBACK: DiffUtil.ItemCallback<GithubUser> =
             object : DiffUtil.ItemCallback<GithubUser>() {

@@ -7,8 +7,9 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.request.RequestOptions
 import com.jp.githubusers.GlideApp
 
-class ImageViewBindingAttributes {
+object ImageViewBindingAttributes {
 
+    @JvmStatic
     @SuppressLint("CheckResult")
     @BindingAdapter(value = ["image_src", "placeholder", "is_rounded"], requireAll = false)
     fun setImageUsingGlide(

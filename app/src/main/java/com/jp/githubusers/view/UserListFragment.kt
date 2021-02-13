@@ -8,8 +8,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jp.githubusers.MainActivity
 import com.jp.githubusers.R
 import com.jp.githubusers.adapters.UserListAdapter
+import com.jp.githubusers.data.GithubUser
 import com.jp.githubusers.databinding.UserListFragmentBinding
 import com.jp.githubusers.util.visible
 import com.jp.githubusers.viewmodel.GithubUsersViewModel
@@ -40,7 +42,6 @@ class UserListFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -60,7 +61,7 @@ class UserListFragment : Fragment() {
         }
     }
 
-    private fun onItemClick(position: Int) {
-
+    private fun onItemClick(users: List<GithubUser?>) {
+        (activity as MainActivity).openUserDetail(users)
     }
 }
