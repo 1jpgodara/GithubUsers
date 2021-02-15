@@ -10,21 +10,21 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jp.githubusers.MainActivity
 import com.jp.githubusers.R
-import com.jp.githubusers.adapters.UserListAdapter
+import com.jp.githubusers.adapters.GithubUsersPaggingAdapter
 import com.jp.githubusers.data.GithubUser
-import com.jp.githubusers.databinding.UserListFragmentBinding
+import com.jp.githubusers.databinding.GithubUsersListFragmentBinding
 import com.jp.githubusers.util.visible
 import com.jp.githubusers.viewmodel.GithubUsersViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class UserListFragment : Fragment() {
+class GithubUsersListFragment : Fragment() {
 
     companion object {
-        fun newInstance() = UserListFragment()
+        fun newInstance() = GithubUsersListFragment()
     }
 
-    private lateinit var binding: UserListFragmentBinding
+    private lateinit var binding: GithubUsersListFragmentBinding
     private lateinit var githubUsersViewModel: GithubUsersViewModel
 
     override fun onCreateView(
@@ -34,7 +34,7 @@ class UserListFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.user_list_fragment,
+            R.layout.github_users_list_fragment,
             container,
             false
         )
@@ -45,7 +45,7 @@ class UserListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val listAdapter = UserListAdapter(::onItemClick)
+        val listAdapter = GithubUsersPaggingAdapter(::onItemClick)
 
         with(binding.listGithubUsers) {
             layoutManager = LinearLayoutManager(context)

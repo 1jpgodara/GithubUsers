@@ -4,19 +4,20 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import com.jp.githubusers.R
 import com.jp.githubusers.data.GithubUser
+import com.jp.githubusers.view.GithubUserListItemVh
 
-open class UserListAdapter(
+open class GithubUsersPaggingAdapter(
     private val onItemClick: (users: List<GithubUser?>) -> Unit
-) : PagingDataAdapter<GithubUser, GithubUserListItemViewHolder>(GithubUser.DIFF_CALLBACK) {
+) : PagingDataAdapter<GithubUser, GithubUserListItemVh>(GithubUser.DIFF_CALLBACK) {
 
     override fun getItemViewType(position: Int) = R.layout.item_github_user_list
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): GithubUserListItemViewHolder {
+    ): GithubUserListItemVh {
         return when (viewType) {
-            R.layout.item_github_user_list -> GithubUserListItemViewHolder.create(parent, viewType)
+            R.layout.item_github_user_list -> GithubUserListItemVh(parent)
                 .apply {
                     this.itemView.setOnClickListener {
                         onItemClick(getClickData(adapterPosition))
@@ -27,10 +28,10 @@ open class UserListAdapter(
         }
     }
 
-    override fun onBindViewHolder(holder: GithubUserListItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holderGithubUser: GithubUserListItemVh, position: Int) {
         val githubUser = getItem(position)
         githubUser?.let {
-            holder.bindTo(githubUser)
+            holderGithubUser.bind(githubUser)
         }
     }
 

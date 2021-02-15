@@ -7,24 +7,24 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class GithubUserRepository {
+class GithubUsersRepository {
 
-    fun getPaggingData(): Flow<PagingData<GithubUser>> {
+    fun getGithubUsers(): Flow<PagingData<GithubUser>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 2,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { UserSource(getClient()) }
+            pagingSourceFactory = { GithubUsersSource(getGithubUsersClient()) }
         ).flow
     }
 
-    private fun getClient(): UsersApi {
+    private fun getGithubUsersClient(): GithubUsersApi {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.github.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        return retrofit.create(UsersApi::class.java)
+        return retrofit.create(GithubUsersApi::class.java)
     }
 }

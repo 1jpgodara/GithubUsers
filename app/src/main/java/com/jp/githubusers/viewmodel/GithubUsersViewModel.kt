@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.jp.githubusers.data.GithubUser
-import com.jp.githubusers.data.GithubUserRepository
+import com.jp.githubusers.data.GithubUsersRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 
 class GithubUsersViewModel : ViewModel() {
 
-    private val githubUserRepo = GithubUserRepository()
+    private val githubUserRepo = GithubUsersRepository()
 
     val job = Job()
     val scope = CoroutineScope(job + Dispatchers.IO)
@@ -24,7 +24,7 @@ class GithubUsersViewModel : ViewModel() {
         val lastResult = githubUserResults
         if (lastResult != null) return lastResult
         val newResult: Flow<PagingData<GithubUser>> =
-            githubUserRepo.getPaggingData().cachedIn(scope)
+            githubUserRepo.getGithubUsers().cachedIn(scope)
         githubUserResults = newResult
         return newResult
     }

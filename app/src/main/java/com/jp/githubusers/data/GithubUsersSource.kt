@@ -4,11 +4,13 @@ import androidx.paging.PagingSource
 import retrofit2.HttpException
 import java.io.IOException
 
-class UserSource(private val githubUserApi: UsersApi) : PagingSource<Int, GithubUser>() {
+class GithubUsersSource(
+    private val githubUserApiGithub: GithubUsersApi
+) : PagingSource<Int, GithubUser>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GithubUser> {
         return try {
-            val response = githubUserApi.getUsers(params.key ?: 0)
+            val response = githubUserApiGithub.getUsers(params.key ?: 0)
             val results = response.body() ?: ArrayList()
 
             LoadResult.Page(

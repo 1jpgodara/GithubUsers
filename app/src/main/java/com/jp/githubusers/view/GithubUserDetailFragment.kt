@@ -9,21 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jp.githubusers.R
 import com.jp.githubusers.adapters.GenericListAdapter
-import com.jp.githubusers.adapters.UserDetailsViewHolder
 import com.jp.githubusers.data.GithubUser
-import com.jp.githubusers.databinding.UserDetailsFragmentBinding
-import com.jp.githubusers.databinding.UserListFragmentBinding
+import com.jp.githubusers.databinding.GithubUserDetailFragmentBinding
 import com.jp.githubusers.util.visible
 
-class UserDetailFragment : Fragment() {
+class GithubUserDetailFragment : Fragment() {
 
     companion object {
         private const val EXTRA_USERS_DATA = "extra_users_data"
 
-        fun newInstance(users: List<GithubUser?>): UserDetailFragment {
+        fun newInstance(users: List<GithubUser?>): GithubUserDetailFragment {
 
 
-            val newFragment = UserDetailFragment()
+            val newFragment = GithubUserDetailFragment()
             val arrayList = ArrayList<GithubUser?>()
             users.forEach {
                 arrayList.add(it)
@@ -35,7 +33,7 @@ class UserDetailFragment : Fragment() {
         }
     }
 
-    private lateinit var binding: UserDetailsFragmentBinding
+    private lateinit var binding: GithubUserDetailFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +42,7 @@ class UserDetailFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.user_details_fragment,
+            R.layout.github_user_detail_fragment,
             container,
             false
         )
@@ -60,7 +58,11 @@ class UserDetailFragment : Fragment() {
         val listAdapter = GenericListAdapter(
             users,
             { _, _ -> },
-            { viewGroup, _ -> UserDetailsViewHolder(viewGroup) },
+            { viewGroup, _ ->
+                GithubUserDetailItemVh(
+                    viewGroup
+                )
+            },
             null
         )
 
