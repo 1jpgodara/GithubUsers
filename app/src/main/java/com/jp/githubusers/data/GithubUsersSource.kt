@@ -16,7 +16,7 @@ class GithubUsersSource(
             LoadResult.Page(
                 data = results,
                 prevKey = params.key,
-                nextKey = params.key ?: 0 + results.size
+                nextKey = params.key?.plus(results.size) ?: results.size
             )
         } catch (exception: IOException) {
             return LoadResult.Error(exception)

@@ -13,7 +13,8 @@ class GithubUsersRepository {
         return Pager(
             config = PagingConfig(
                 pageSize = 2,
-                enablePlaceholders = false
+                enablePlaceholders = true,
+                prefetchDistance = 10
             ),
             pagingSourceFactory = { GithubUsersSource(getGithubUsersClient()) }
         ).flow

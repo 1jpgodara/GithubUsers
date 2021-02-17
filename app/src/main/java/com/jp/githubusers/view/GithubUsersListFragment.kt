@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jp.githubusers.MainActivity
 import com.jp.githubusers.R
-import com.jp.githubusers.adapters.GithubUsersPaggingAdapter
+import com.jp.githubusers.adapters.GithubUsersAdapter
 import com.jp.githubusers.data.GithubUser
 import com.jp.githubusers.databinding.GithubUsersListFragmentBinding
 import com.jp.githubusers.util.visible
@@ -45,7 +45,7 @@ class GithubUsersListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val listAdapter = GithubUsersPaggingAdapter(::onItemClick)
+        val listAdapter = GithubUsersAdapter(::onItemClick)
 
         with(binding.listGithubUsers) {
             layoutManager = LinearLayoutManager(context)

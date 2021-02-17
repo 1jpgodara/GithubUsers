@@ -6,7 +6,7 @@ import com.jp.githubusers.R
 import com.jp.githubusers.data.GithubUser
 import com.jp.githubusers.view.GithubUserListItemVh
 
-open class GithubUsersPaggingAdapter(
+open class GithubUsersAdapter(
     private val onItemClick: (users: List<GithubUser?>) -> Unit
 ) : PagingDataAdapter<GithubUser, GithubUserListItemVh>(GithubUser.DIFF_CALLBACK) {
 
